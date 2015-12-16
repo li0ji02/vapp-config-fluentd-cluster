@@ -1,0 +1,16 @@
+echo "[*] Running '00_ProcessConfig'"
+echo "[*] ELASTICSEARCH_HOST=[${ELASTICSEARCH_HOST}]"
+echo "[*] ELASTICSEARCH_PORT=[${ELASTICSEARCH_PORT}]"
+
+TD_AGENT_CONFIG_SRC=/solution/fluentd-config/td-agent.conf
+TD_AGENT_CONFIG_DEST=/etc/td-agent/td-agent.conf
+
+# Replace the existing td-agent.conf file
+cp -f "$TD_AGENT_CONFIG_SRC" "$TD_AGENT_CONFIG_DEST"
+
+sed -i "s/\$ELASTICSEARCH_HOST/$ELASTICSEARCH_HOST/g" "$TD_AGENT_CONFIG_DEST"
+sed -i "s/\$ELASTICSEARCH_PORT/$ELASTICSEARCH_PORT/g" "$TD_AGENT_CONFIG_DEST"
+
+echo "[*] Processed td-agent.conf file:"
+cat "$TD_AGENT_CONFIG_DEST"
+
