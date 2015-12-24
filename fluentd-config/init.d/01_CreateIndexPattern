@@ -1,5 +1,6 @@
 ELASTICSEARCH_URL=http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
 INDEX_PATTERN=kubernetes-*
+KIBANA_VERSION=4.3.0
 
 INDEX_PATTERN_PAYLOAD_1='{"title" : "'
 INDEX_PATTERN_PAYLOAD_2='",  "timeFieldName": "@timestamp"}'
@@ -13,6 +14,7 @@ echo "[*] Elasticsearch is running at ${ELASTICSEARCH_URL}"
 echo "[*] INDEX_PATTERN is ${INDEX_PATTERN}"
 echo "[*] INDEX_PATTERN_PAYLOAD is ${INDEX_PATTERN_PAYLOAD}"
 echo "[*] DEFAULT_INDEX_PATTERN_PAYLOAD is ${DEFAULT_INDEX_PATTERN_PAYLOAD}"
+echo "[*] KIBANA_VERSION is ${KIBANA_VERSION}"
 
 echo "[*] ========================================================================="
 echo "[*] check to see if elasticsearch is running and the .kibana index exists ..."
@@ -66,7 +68,7 @@ if [ "$HTTP_STATUS" -ne 200 ]; then
         echo "[*] set default index pattern ..."
 
         set +e
-        HTTP_STATUS=`curl -XPUT --write-out "%{http_code}" --silent --output /dev/null $ELASTICSEARCH_URL/.kibana/config/4.3.0 -d "$DEFAULT_INDEX_PATTERN_PAYLOAD"`
+        HTTP_STATUS=`curl -XPUT --write-out "%{http_code}" --silent --output /dev/null $ELASTICSEARCH_URL/.kibana/config/$KIBANA_VERSION -d "$DEFAULT_INDEX_PATTERN_PAYLOAD"`
         RETVAL=$?
         set -e
 
