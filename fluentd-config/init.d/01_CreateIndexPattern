@@ -1,7 +1,6 @@
 ELASTICSEARCH_URL=http://${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}
 DEFAULT_INDEX_PATTERN=kubernetes-*
 ALL_INDEX_PATTERNS='kube-apiserver-* kube-proxy-* kubelet-* kube-controller-manager-* etc2-*'
-KIBANA_VERSION=4.3.1
 
 INDEX_PATTERN_PAYLOAD_1='{"title" : "'
 INDEX_PATTERN_PAYLOAD_2='",  "timeFieldName": "@timestamp"}'
